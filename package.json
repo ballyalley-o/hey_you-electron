@@ -1,0 +1,14 @@
+{
+  "name": "hey_you-electron_",
+  "version": "1.0.0",
+  "description": "electron sandbox",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bally Lomibao",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^25.5.0"
+  }
+}
