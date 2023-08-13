@@ -2,8 +2,9 @@
   "name": "hey_you-electron_",
   "version": "1.0.0",
   "description": "electron sandbox",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
+    "electron": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Bally Lomibao",
