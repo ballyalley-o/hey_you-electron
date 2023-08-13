@@ -4,6 +4,11 @@ const PLATFORM = {
   linux: 'linux',
 }
 
+const GLOBAL_CONFIG = {
+  NODE_ENV: 'production',
+}
+
 module.exports = {
   PLATFORM,
+  GLOBAL_CONFIG,
 }
