@@ -2,6 +2,9 @@ const menuTemplate = (app) => {
   return [
     {
       label: 'File',
+    },
+    {
+      label: 'Menu',
       submenu: [
         {
           label: 'New Note',
@@ -9,6 +12,7 @@ const menuTemplate = (app) => {
         },
         {
           label: 'Delete Note',
+          accelerator: 'CmdOrCtrl+D',
         },
         {
           label: 'Quit',

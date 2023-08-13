@@ -18,5 +18,7 @@ app.on(EVENTS.READY, () => {
 })
 
 if (process.platform === PLATFORM.mac) {
-  menuTemplate(app).unshift({})
+  menuTemplate(app).unshift({
+    label: 'Electron',
+  })
 }
