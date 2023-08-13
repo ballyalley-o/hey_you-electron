@@ -34,9 +34,13 @@
           </button>
         </form>
         <script>
+          const electron = require('electron')
+          const { ipcRenderer } = electron.ipcRenderer
           document.querySelector('form').addEventListener('submit', (e) => {
             e.preventDefault()
-            const note = e.target[0].value
+
+            const { value } = ocument.querySelector('input').value
+            ipcRenderer.send('note:add', value)
           })
         </script>
       </div>

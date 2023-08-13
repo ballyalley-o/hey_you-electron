@@ -1,7 +1,12 @@
 const electron = require('electron')
 const { createAddWindow } = require('../actions')
-const { app } = electron
-const addWindow = require('../app')
+const { app, ipcMain } = electron
+const { addWindow, mainWindow } = require('../app')
+
+ipcMain.on('note:add', (event, note) => {
+  mainWindow.webContents.send('note:add', note)
+  addWindow.close()
+})
 
 const menuTemplate = [
   {
