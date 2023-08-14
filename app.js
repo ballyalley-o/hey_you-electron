@@ -4,12 +4,12 @@ const menuTemplate = require('./utils/menu-template')
 const createAddWindow = require('./actions')
 // constants
 const { PLATFORM, GLOBAL_CONFIG } = require('./config')
-const { EVENTS, MENU, SUB_MENU } = require('./constants')
+const { EVENTS, MENU_VALUES } = require('./constants')
 
-const { app, BrowserWindow, Menu } = electron
+const { app, BrowserWindow, Menu, ipcMain } = electron
 
-exports.mainWindow
-exports.addWindow
+let mainWindow
+let addWindow
 
 app.on(EVENTS.READY, () => {
   mainWindow = new BrowserWindow({})
@@ -22,16 +22,16 @@ app.on(EVENTS.READY, () => {
 
 if (process.platform === PLATFORM.mac) {
   menuTemplate.unshift({
-    label: MENU.ELECTRON.label,
+    label: MENU_VALUES.ELECTRON.label,
   })
 }
 
 if (process.env.NODE_ENV !== 'production') {
   menuTemplate.push({
-    label: 'View',
+    label: MENU_VALUES.VIEW.label,
     submenu: [
       {
-        label: 'Developer Tools',
+        label: MENU_VALUES.DEV_TOOLS.label,
         accelerator:
           process.platform === PLATFORM.mac ? 'Command+Alt+I' : 'Ctrl+Shift+I',
         click(item, focusedWindow) {
@@ -41,3 +41,10 @@ if (process.env.NODE_ENV !== 'production') {
     ],
   })
 }
+
+ipcMain.on('note:add', (event, note) => {
+  mainWindow.webContents.send('note:add', note)
+  addWindow.close()
+})
+
+module.exports = mainWindow

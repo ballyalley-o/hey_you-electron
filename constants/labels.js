@@ -1,4 +1,4 @@
-exports.MENU_ = {
+const MENU_VALUES = {
   label: 'Menu',
 
   ELECTRON: {
@@ -8,12 +8,11 @@ exports.MENU_ = {
     label: 'File',
   },
   VIEW: {
-    label: 'View',
+    label: 'Developer',
   },
-}
-
-exports.SUB_MENU = {
   DEV_TOOLS: {
     label: 'Developer Tools',
   },
 }
+
+module.exports = MENU_VALUES
