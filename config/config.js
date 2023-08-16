@@ -1,9 +1,13 @@
 const PLATFORM = {
-  mac: 'darwin',
+  _def: {
+    accelerator: 'Ctrl+Shift+I',
+  },
+  mac: {
+    accelerator: 'Command+Alt+I',
+    value: 'darwin',
+  },
   win: 'win32',
   linux: 'linux',
 }
 
-module.exports = {
-  PLATFORM,
-}
+module.exports = PLATFORM

@@ -12,6 +12,7 @@ app.on(EVENTS.READY, () => {
   mainWindow = new BrowserWindow({
     width: GLOBAL_CONFIG.WIDTH,
     height: GLOBAL_CONFIG.HEIGHT,
+    //  newer versions of electron require this,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -29,6 +30,7 @@ function createAddWindow() {
     width: 500,
     height: 400,
     title: MENU_VALUES.ADD_NOTE.label,
+    // newer versions of electron require this,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -45,25 +47,31 @@ ipcMain.on('note:add', (event, note) => {
 
 const menuTemplate = [
   {
-    label: 'File',
+    label: MENU_VALUES.FILE.label,
   },
   {
-    label: 'Menu',
+    label: MENU_VALUES.MENU.label,
     submenu: [
       {
-        label: 'New Note',
-        accelerator: 'CmdOrCtrl+N',
+        label: MENU_VALUES.ADD_NOTE.label,
+        accelerator: MENU_VALUES.ADD_NOTE.accelerator,
         click() {
           createAddWindow()
         },
       },
       {
-        label: 'Delete Note',
-        accelerator: 'CmdOrCtrl+D',
+        role: MENU_VALUES.RELOAD.value,
       },
       {
-        label: 'Quit',
-        accelerator: 'CmdOrCtrl+Q',
+        label: MENU_VALUES.DELETE_NOTE.label,
+        accelerator: MENU_VALUES.DELETE_NOTE.accelerator,
+        click() {
+          mainWindow.webContents.send('note:clear')
+        },
+      },
+      {
+        label: MENU_VALUES.QUIT.label,
+        accelerator: MENU_VALUES.QUIT.accelerator,
         click() {
           app.quit()
         },
@@ -85,7 +93,9 @@ if (process.env.NODE_ENV !== 'production') {
       {
         label: MENU_VALUES.DEV_TOOLS.label,
         accelerator:
-          process.platform === PLATFORM.mac ? 'Command+Alt+I' : 'Ctrl+Shift+I',
+          process.platform === PLATFORM.mac.value
+            ? PLATFORM.mac.accelerator
+            : PLATFORM._def.accelerator,
         click(item, focusedWindow) {
           focusedWindow.toggleDevTools()
         },

@@ -20,9 +20,8 @@
         <p class="text-xl font-thin">These are your notes!</p>
 
         <div class="mt-5">
-          <ul class="text-white list-disc">
-            <li>sample list</li>
-          </ul>
+          <!-- <button type="button" disabled class="mr-2">x</button> -->
+          <ul class="text-white list-disc"></ul>
         </div>
       </div>
       <div
@@ -41,6 +40,18 @@
 
         li.appendChild(text)
         document.querySelector('ul').appendChild(li)
+        const clearBtn = document.querySelector('button')
+
+        const allNotes = document.querySelector('ul')
+
+        if (allNotes.length > 0) {
+          clearBtn.disabled = false
+        }
+
+        ipcRenderer.on('note:clear', () => {
+          allNotes.innerHTML = ''
+          clearBtn.disabled = true
+        })
       })
     </script>
   </body>
