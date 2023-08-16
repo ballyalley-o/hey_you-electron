@@ -6,15 +6,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    <div class="container">
-      <div
-        class="flex flex-col bg-gray-900 text-white justify-center items-center h-screen"
-      >
-        <form action="" class="form" type="submit">
+    <form>
+      <div class="container">
+        <div
+          class="flex flex-col bg-gray-900 text-white justify-center items-center h-screen"
+        >
           <div class="bg-gradient-to-r gap-3">
             <h1 class="text-2xl font-bold justify-center">Add a New Note</h1>
             <input
-              type="text"
               autofocus
               placeholder="Start typing..."
               class="border-2 text-gray-600 border-gray-800 rounded-lg my-5 w-80 p-2 :outline-none focus:ring-2 focus:ring-gray-800 focus:border-transparent"
@@ -27,14 +26,14 @@
             </button> -->
           </div>
           <button
-            type="button"
-            class="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-white font-bold py-2 px-4 rounded"
+            type="submit"
+            class="bg-gradient-to-r full-width from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-white font-bold py-2 px-4 rounded"
           >
             Add Note
           </button>
-        </form>
+        </div>
       </div>
-    </div>
+    </form>
     <script>
       const electron = require('electron')
       const { ipcRenderer } = electron

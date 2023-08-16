@@ -1,7 +1,4 @@
 const electron = require('electron')
-// assets
-const menuTemplate = require('./utils/menu-template')
-const createAddWindow = require('./actions')
 // constants
 const { PLATFORM, GLOBAL_CONFIG } = require('./config')
 const { EVENTS, MENU_VALUES } = require('./constants')
@@ -19,6 +16,54 @@ app.on(EVENTS.READY, () => {
   const mainMenu = Menu.buildFromTemplate(menuTemplate)
   Menu.setApplicationMenu(mainMenu)
 })
+
+function createAddWindow() {
+  addWindow = new BrowserWindow({
+    width: 500,
+    height: 400,
+    title: MENU_VALUES.ADD_NOTE.label,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
+  })
+  addWindow.loadURL(`file://${__dirname}/views/add.html`)
+  addWindow.on(EVENTS.CLOSE, () => (addWindow = null))
+}
+
+ipcMain.on('note:add', (event, note) => {
+  mainWindow.webContents.send('note:add', note)
+  addWindow.close()
+})
+
+const menuTemplate = [
+  {
+    label: 'File',
+  },
+  {
+    label: 'Menu',
+    submenu: [
+      {
+        label: 'New Note',
+        accelerator: 'CmdOrCtrl+N',
+        click() {
+          createAddWindow()
+        },
+      },
+      {
+        label: 'Delete Note',
+        accelerator: 'CmdOrCtrl+D',
+      },
+      {
+        label: 'Quit',
+        accelerator: 'CmdOrCtrl+Q',
+        click() {
+          app.quit()
+        },
+      },
+    ],
+  },
+]
 
 if (process.platform === PLATFORM.mac) {
   menuTemplate.unshift({
@@ -41,10 +86,3 @@ if (process.env.NODE_ENV !== 'production') {
     ],
   })
 }
-
-ipcMain.on('note:add', (event, note) => {
-  mainWindow.webContents.send('note:add', note)
-  addWindow.close()
-})
-
-module.exports = mainWindow

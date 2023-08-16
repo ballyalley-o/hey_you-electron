@@ -13,6 +13,9 @@ const MENU_VALUES = {
   DEV_TOOLS: {
     label: 'Developer Tools',
   },
+  ADD_NOTE: {
+    label: 'Add a Note',
+  },
 }
 
 module.exports = MENU_VALUES

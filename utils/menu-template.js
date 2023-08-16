@@ -1,7 +1,7 @@
 const electron = require('electron')
-const { createAddWindow } = require('../actions')
+// const { createAddWindow } = require('../actions')
 const { app, ipcMain } = electron
-const { addWindow } = require('../app')
+const { createWindow } = require('../app')
 
 const menuTemplate = [
   {
@@ -14,7 +14,7 @@ const menuTemplate = [
         label: 'New Note',
         accelerator: 'CmdOrCtrl+N',
         click() {
-          createAddWindow(addWindow)
+          createWindow
         },
       },
       {
