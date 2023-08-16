@@ -9,7 +9,14 @@ let mainWindow
 let addWindow
 
 app.on(EVENTS.READY, () => {
-  mainWindow = new BrowserWindow({})
+  mainWindow = new BrowserWindow({
+    width: GLOBAL_CONFIG.WIDTH,
+    height: GLOBAL_CONFIG.HEIGHT,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
+  })
   mainWindow.loadURL(`file://${__dirname}/views/main.html`)
   mainWindow.on(EVENTS.CLOSE, () => app.quit())
 
